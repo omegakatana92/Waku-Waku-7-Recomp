@@ -1,13 +1,13 @@
-# Waku Waku 7 v0.1.0 - native recompilation
+﻿# Waku Waku 7 v0.1.0 - native recompilation
 
 First public build of the Waku Waku 7 static recompilation on NeoGeoRecomp
 v0.2.0.
 
 ## Downloads
 
-* `Waku Waku 7-Windows-x64.zip` - Windows 10/11 x64, SDL2 and VC runtime
+* `Waku-Waku-7-Windows-x64.zip` - Windows 10/11 x64, SDL2 and VC runtime
   included.
-* `Waku Waku 7-SteamDeck-x86_64.AppImage` - Linux x86_64 / Steam Deck.
+* `Waku-Waku-7-SteamDeck-x86_64.AppImage` - Linux x86_64 / Steam Deck.
 * `SHA256SUMS.txt` - hashes for both packages.
 
 No game ROMs or BIOS files are included. Unzip your own legally obtained MAME
@@ -38,3 +38,4 @@ AppImage, or pass `--rom-path`.
   program bank is interpreted by design if reached.
 * Original project code: PolyForm Noncommercial 1.0.0. Vendored toolkit and
   dependencies keep their MIT/BSD/zlib licences.
+
