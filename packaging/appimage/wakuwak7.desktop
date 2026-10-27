@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Waku Waku 7
+Comment=Native static recompilation of Waku Waku 7 (Neo Geo)
+Exec=wakuwak7
+Icon=wakuwak7
+Categories=Game;ArcadeGame;
+Terminal=false
