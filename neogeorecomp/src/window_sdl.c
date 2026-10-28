@@ -56,9 +56,40 @@ int window_open(const char *title, int scale, int fullscreen) {
     s_fullscreen = fullscreen;
     s_win = SDL_CreateWindow(title, SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                              w, h, flags);
+    if (!s_win) {
+        fprintf(stderr, "error: SDL_CreateWindow: %s\n", SDL_GetError());
+        SDL_Quit();
+        return -1;
+    }
+    /* Prefer hardware rendering, but fall back to SDL's software renderer on
+     * systems without a usable GPU driver (minimal SteamOS sessions, VMs,
+     * remote desktops). */
     s_ren = SDL_CreateRenderer(s_win, -1, SDL_RENDERER_ACCELERATED);
+    if (!s_ren) {
+        fprintf(stderr, "warning: accelerated renderer unavailable (%s); trying software\n",
+                SDL_GetError());
+        s_ren = SDL_CreateRenderer(s_win, -1, SDL_RENDERER_SOFTWARE);
+    }
+    if (!s_ren)
+        s_ren = SDL_CreateRenderer(s_win, -1, 0);
+    if (!s_ren) {
+        fprintf(stderr, "error: SDL_CreateRenderer: %s\n", SDL_GetError());
+        SDL_DestroyWindow(s_win);
+        s_win = NULL;
+        SDL_Quit();
+        return -1;
+    }
     s_tex = SDL_CreateTexture(s_ren, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING,
                               NG_SCREEN_W, NG_SCREEN_H);
+    if (!s_tex) {
+        fprintf(stderr, "error: SDL_CreateTexture: %s\n", SDL_GetError());
+        SDL_DestroyRenderer(s_ren);
+        s_ren = NULL;
+        SDL_DestroyWindow(s_win);
+        s_win = NULL;
+        SDL_Quit();
+        return -1;
+    }
     s_next_tick = SDL_GetPerformanceCounter();
     /* Sound at the YM2610's own rate; SDL converts it for the device. A
      * missing audio device leaves the game silent, not stopped. */
