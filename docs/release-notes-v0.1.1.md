@@ -22,14 +22,26 @@ it looked for `~/.local/share/fatfury3/roms`. It was not a rename issue.
   `~/.local/share/breakers/roms` for BIOS files when needed.
 * Added an SDL software-renderer fallback for systems without a usable GPU
   driver.
+* Rebuilt the Windows x64 package with the same corrected source.
 * Removed all Fatal Fury 3 references.
 
-## Asset
+## Assets
+
+### Linux / Steam Deck
 
 `Waku-Waku-7-Fixed-SteamDeck-x86_64.AppImage`
 
 * Size: 9,652,728 bytes
 * SHA-256: `83dc16cd8e8a7fb06dba8658aabcea67e4652a7c83b54e57359cf203f8bd12c3`
+
+### Windows x64
+
+`Waku-Waku-7-Fixed-Windows-x64.zip`
+
+* Size: 9,007,372 bytes
+* SHA-256: `0cc6e56db22239f16a41ed1bbc8c430b4e8bfaac1ff5d6c040428eaeb84999f6`
+* Contains `Waku Waku 7.exe`, SDL2.dll, VC runtime, documentation and
+  licences. No ROMs, BIOS files or CMake build files.
 
 ## Verified
 
@@ -42,6 +54,9 @@ it looked for `~/.local/share/fatfury3/roms`. It was not a rename issue.
 * Forced software renderer: passed.
 * Gameplay screenshot at frame 2500: Waku Waku 7 match (Rai vs Mauro).
 * 12,000-frame audio capture: 202.8 s, 55,555 Hz stereo, peak 26,940.
+* Windows package: headless, windowed and fullscreen launches exit 0;
+  `--verify` 2,000 frames reports 0 mismatches; 3,000-frame WAV capture
+  (50.7 s, 55,555 Hz, peak 27,652).
 
 ## Not tested
 
